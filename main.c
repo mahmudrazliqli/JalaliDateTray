@@ -74,8 +74,8 @@ static GdkPixbuf* create_text_pixbuf(const char *text) {
     
     // Set up the text
     //cairo_select_font_face(cr, "Sans", CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_BOLD);
-    //cairo_select_font_face(cr, "Noto Sans Arabic", CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_BOLD);
-	cairo_select_font_face(cr, "Vazir", CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_BOLD);
+    cairo_select_font_face(cr, "Noto Sans Arabic", CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_BOLD);
+	//cairo_select_font_face(cr, "Vazir", CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_BOLD);
 	
     cairo_set_font_size(cr, 20);
     

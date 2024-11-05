@@ -74,7 +74,7 @@ static GdkPixbuf* create_text_pixbuf(const char *text) {
     
     // Set up the text
     //cairo_select_font_face(cr, "Sans", CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_BOLD);
-    cairo_select_font_face(cr, "Noto Sans Arabic", CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_BOLD);
+    cairo_select_font_face(cr, "Noto Sans Arabic", CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL);
 	//cairo_select_font_face(cr, "Vazir", CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_BOLD);
 	
     cairo_set_font_size(cr, 20);
@@ -152,7 +152,7 @@ static void update_icon_label() {
 	gtk_status_icon_set_from_pixbuf(status_icon, pixbuf);
 
 	char tooltip_str[256];
-	snprintf(tooltip_str, 50,"%s %d/%d/%d \n   %d %s",days_of_week[br_time->tm_wday], jalali_sal, jalali_mah, jalali_ruz, jalali_ruz, jalali_months[jalali_mah]);	
+	snprintf(tooltip_str, 50,"%s\n %d/%d/%d \n   %d %s",days_of_week[br_time->tm_wday], jalali_sal, jalali_mah, jalali_ruz, jalali_ruz, jalali_months[jalali_mah]);	
 	// 1234567890 to ۱۲۳۴۵۶۷۸۹۰
 	newChar = "۱";replaceCharacter(tooltip_str,'1',newChar);
 	newChar = "۲";replaceCharacter(tooltip_str,'2',newChar);

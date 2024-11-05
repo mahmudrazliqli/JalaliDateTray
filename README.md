@@ -3,7 +3,7 @@
 ## About
 shows the current Jalali day of the month in the system tray
 
-#linux
+# linux
 compile:
 ```bash
 make

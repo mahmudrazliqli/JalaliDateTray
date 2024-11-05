@@ -46,7 +46,7 @@ deb:all
 	dpkg-deb --build jalalidate-1.0
 	rm -rf jalalidate-1.0
 
-install:	
+install:deb	
 	sudo dpkg -i jalalidate-1.0.deb
 	
 uninstall:

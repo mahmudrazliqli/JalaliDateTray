@@ -22,4 +22,3 @@ compile:
 ```bash
 make all
 ```
-## ٌهد

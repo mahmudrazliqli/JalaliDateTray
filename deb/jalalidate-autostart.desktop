@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Exec=jalalidate
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name=Jalali Date Tray
+Comment=Start Jalali Date Application at login

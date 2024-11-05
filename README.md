@@ -1,2 +1,1 @@
-# JalaliDateTray
-JalaliDateTray
+Jalali Date shows the current Jalali day of the month in the system tray

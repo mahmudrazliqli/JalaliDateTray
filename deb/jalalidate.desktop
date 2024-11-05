@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Name=Jalali Date Tray
+Comment=Jalali Date shows the current Jalali day of the month in the system tray 
+Exec=jalalidate
+Icon=jalalidate
+Terminal=false
+Type=Application
+Categories=Utility;Application;
+StartupNotify=true

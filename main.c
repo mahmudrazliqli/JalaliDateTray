@@ -64,18 +64,20 @@ static GdkPixbuf* create_text_pixbuf(const char *text) {
     cairo_t *cr = cairo_create(surface);
     
     // Clear the surface with transparency
-    cairo_set_source_rgba(cr, 1.0, 1.0, 1.0, 0.1);
+    cairo_set_source_rgba(cr, 1.0, 1.0, 1.0, 1.0);
     cairo_paint(cr);
 
     // Draw a circle
-    cairo_arc(cr, 0, 0, 10, 0, 2 * G_PI); // Circle
-    cairo_set_source_rgba(cr, 0.5, 1.0, 1.0, 0.5);
-    cairo_paint(cr);
+    //cairo_arc(cr, 0, 0, 10, 0, 2 * G_PI); // Circle
+   // cairo_set_source_rgba(cr, 0.5, 1.0, 1.0, 0.5);
+    //cairo_paint(cr);
     
     // Set up the text
     //cairo_select_font_face(cr, "Sans", CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_BOLD);
-    cairo_select_font_face(cr, "Noto Sans Arabic", CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_BOLD);
-    cairo_set_font_size(cr, 14);
+    //cairo_select_font_face(cr, "Noto Sans Arabic", CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_BOLD);
+	cairo_select_font_face(cr, "Vazir", CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_BOLD);
+	
+    cairo_set_font_size(cr, 20);
     
     // Set white color for text
     cairo_set_source_rgb(cr, 0, 0, 0);  // RGB values for white
@@ -125,7 +127,7 @@ static void update_icon_label() {
 	time(&bin_time);
 	br_time = localtime(&bin_time);
 
-	const char *days_of_week[] = {"شنبه", "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنجشنبه", "جمعه"};
+	const char *days_of_week[] = {  "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنجشنبه","جمعه","شنبه"};
 	const char *jalali_months[] = {"فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور", "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند"};
 	
 	

@@ -1,3 +1,4 @@
+APPVER= 1.1
 all:clean
 ifeq ($(OS), Windows_NT)
 	gcc main.c  `pkg-config --cflags --libs gtk+-3.0`  -c -o main.o
@@ -26,28 +27,28 @@ program:all
 #sudo apt update
 #sudo apt install build-essential debhelper dh-make libgtk-3-dev
 deb:all
-	rm -rf jalalidate-1.0.deb jalalidate-1.0
-	mkdir -p jalalidate-1.0/usr/share/applications/
-	mkdir -p jalalidate-1.0/usr/share/icons/hicolor/48x48/apps
-	#mkdir -p jalalidate-1.0/usr/share/autostart
-	mkdir -p jalalidate-1.0/etc/xdg/autostart
-	mkdir -p jalalidate-1.0/usr/bin
-	mkdir -p jalalidate-1.0/DEBIAN
-	cp ./deb/control 						jalalidate-1.0/DEBIAN/
-	cp ./main 								jalalidate-1.0/usr/bin/jalalidate
-	cp ./deb/jalalidate.desktop 			jalalidate-1.0/usr/share/applications/
-	cp ./deb/jalalidate.png 				jalalidate-1.0/usr/share/icons/hicolor/48x48/apps/
-	#cp ./deb/jalalidate-autostart.desktop 	jalalidate-1.0/usr/share/autostart/
-	cp ./deb/jalalidate-autostart.desktop 	jalalidate-1.0/etc/xdg/autostart
-	chmod 755 jalalidate-1.0/DEBIAN
-	chmod 644 jalalidate-1.0/usr/share/applications/jalalidate.desktop
-	chmod 644 jalalidate-1.0/etc/xdg/autostart/jalalidate-autostart.desktop
-	#chmod 644 jalalidate-1.0/usr/share/autostart/jalalidate-autostart.desktop
-	dpkg-deb --build jalalidate-1.0
-	rm -rf jalalidate-1.0
+	rm -rf jalalidate-$(APPVER).deb jalalidate-$(APPVER)
+	mkdir -p jalalidate-$(APPVER)/usr/share/applications/
+	mkdir -p jalalidate-$(APPVER)/usr/share/icons/hicolor/48x48/apps
+	#mkdir -p jalalidate-$(APPVER)/usr/share/autostart
+	mkdir -p jalalidate-$(APPVER)/etc/xdg/autostart
+	mkdir -p jalalidate-$(APPVER)/usr/bin
+	mkdir -p jalalidate-$(APPVER)/DEBIAN
+	cp ./deb/control 						jalalidate-$(APPVER)/DEBIAN/
+	cp ./main 								jalalidate-$(APPVER)/usr/bin/jalalidate
+	cp ./deb/jalalidate.desktop 			jalalidate-$(APPVER)/usr/share/applications/
+	cp ./deb/jalalidate.png 				jalalidate-$(APPVER)/usr/share/icons/hicolor/48x48/apps/
+	#cp ./deb/jalalidate-autostart.desktop 	jalalidate-$(APPVER)/usr/share/autostart/
+	cp ./deb/jalalidate-autostart.desktop 	jalalidate-$(APPVER)/etc/xdg/autostart
+	chmod 755 jalalidate-$(APPVER)/DEBIAN
+	chmod 644 jalalidate-$(APPVER)/usr/share/applications/jalalidate.desktop
+	chmod 644 jalalidate-$(APPVER)/etc/xdg/autostart/jalalidate-autostart.desktop
+	#chmod 644 jalalidate-$(APPVER)/usr/share/autostart/jalalidate-autostart.desktop
+	dpkg-deb --build jalalidate-$(APPVER)
+	rm -rf jalalidate-$(APPVER)
 
 install:deb	
-	sudo dpkg -i jalalidate-1.0.deb
+	sudo dpkg -i jalalidate-$(APPVER).deb
 	
 uninstall:
 	sudo dpkg -r jalalidate

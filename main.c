@@ -2,6 +2,8 @@
 #include <gtk/gtk.h>
 #include <time.h>
 #include <cairo.h>
+#include <string.h>
+#include <stdio.h>
 
 
 
@@ -104,21 +106,19 @@ static GdkPixbuf* create_text_pixbuf(const char *text) {
 
 
 void replaceCharacter(char *str, char oldChar, const char *newChar) {
-    char buffer[1000]; // Temporary buffer to hold the modified string
-    int i, j = 0;
-
-    for (i = 0; str[i] != '\0'; i++) {
+    GString *result = g_string_new("");
+    
+    for (int i = 0; str[i] != '\0'; i++) {
         if (str[i] == oldChar) {
-            // If the character matches, copy the new character
-            for (int k = 0; newChar[k] != '\0'; k++) {
-                buffer[j++] = newChar[k]; // Copy each byte of the new character
-            }
+            g_string_append(result, newChar);
         } else {
-            buffer[j++] = str[i]; // Copy the original character
+            g_string_append_c(result, str[i]);
         }
     }
-    buffer[j] = '\0'; // Null-terminate the new string
-    strcpy(str, buffer); // Copy the modified string back to the original
+    
+    // Copy result back to original string
+    strcpy(str, result->str);
+    g_string_free(result, TRUE);
 }
 
 static void update_icon_label() {
@@ -149,7 +149,9 @@ static void update_icon_label() {
 	newChar = "۹";replaceCharacter(day_str,'9',newChar);
 	newChar = "۰";replaceCharacter(day_str,'0',newChar);
 	GdkPixbuf *pixbuf = create_text_pixbuf(day_str);
+	G_GNUC_BEGIN_IGNORE_DEPRECATIONS
 	gtk_status_icon_set_from_pixbuf(status_icon, pixbuf);
+	G_GNUC_END_IGNORE_DEPRECATIONS
 
 	char tooltip_str[256];
 	snprintf(tooltip_str, 50,"%s\n %d/%d/%d \n   %d %s",days_of_week[br_time->tm_wday], jalali_sal, jalali_mah, jalali_ruz, jalali_ruz, jalali_months[jalali_mah]);	
@@ -164,22 +166,19 @@ static void update_icon_label() {
 	newChar = "۸";replaceCharacter(tooltip_str,'8',newChar);
 	newChar = "۹";replaceCharacter(tooltip_str,'9',newChar);
 	newChar = "۰";replaceCharacter(tooltip_str,'0',newChar);
+	G_GNUC_BEGIN_IGNORE_DEPRECATIONS
 	gtk_status_icon_set_tooltip_text(status_icon, tooltip_str);
+	G_GNUC_END_IGNORE_DEPRECATIONS
     
     	g_object_unref(pixbuf);
 }
 
-static void show_window(GtkMenuItem *item, gpointer user_data) {
-    gtk_widget_show_all(window);
-    gtk_window_present(GTK_WINDOW(window));
-}
-
-static void quit_app(GtkMenuItem *item, gpointer user_data) {
+static void quit_app(GtkMenuItem *item G_GNUC_UNUSED, gpointer user_data G_GNUC_UNUSED) {
     gtk_main_quit();
 }
 
-static void popup_menu(GtkStatusIcon *status_icon, guint button,
-                      guint activate_time, gpointer user_data) {
+static void popup_menu(GtkStatusIcon *status_icon G_GNUC_UNUSED, guint button G_GNUC_UNUSED,
+                      guint activate_time G_GNUC_UNUSED, gpointer user_data G_GNUC_UNUSED) {
     GtkWidget *menu;
     GtkWidget *menu_item;
 
@@ -200,10 +199,10 @@ static void popup_menu(GtkStatusIcon *status_icon, guint button,
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), menu_item);
 
     gtk_widget_show_all(menu);
-    gtk_menu_popup(GTK_MENU(menu), NULL, NULL, NULL, NULL, button, activate_time);
+    gtk_menu_popup_at_pointer(GTK_MENU(menu), NULL);
 }
 
-static gboolean update_timer(gpointer user_data) {
+static gboolean update_timer(gpointer user_data G_GNUC_UNUSED) {
     update_icon_label();
     return G_SOURCE_CONTINUE;
 }
@@ -218,8 +217,10 @@ int main(int argc, char *argv[]) {
     g_signal_connect(window, "delete-event", G_CALLBACK(gtk_widget_hide_on_delete), NULL);
 
     // Create status icon (initially empty)
+    G_GNUC_BEGIN_IGNORE_DEPRECATIONS
     status_icon = gtk_status_icon_new();
     gtk_status_icon_set_visible(status_icon, TRUE);
+    G_GNUC_END_IGNORE_DEPRECATIONS
 
     // Connect signals
     g_signal_connect(status_icon, "popup-menu", G_CALLBACK(popup_menu), NULL);

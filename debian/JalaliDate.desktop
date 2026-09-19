@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=JalaliDate
+GenericName=Jalali Date
+Comment=Jalali Date calendar
+Exec=JalaliDate
+Icon=JalaliDate
+Terminal=false
+Categories=calendar;
+Keywords=calendar,shamsi,hijri;
+StartupNotify=true
+Name[en_US]=JalaliDate

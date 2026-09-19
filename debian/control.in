@@ -1,0 +1,9 @@
+Package: JalaliDate
+Version: @VERSION@
+Section: electronics
+Priority: optional
+Architecture: @ARCH@
+Depends: @DEPS@
+Maintainer: Bir <bir@localhost>
+Description: 
+ JalaliDate in system tray
